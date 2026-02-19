@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
+import Link from "next/link";
 
 export default function Hero(){
     return(
@@ -22,7 +23,9 @@ export default function Hero(){
        </section>
 
        <div className="mt-[16rem] flex flex-col items-center justify-center gap-8 mb-12">
-         <button className="btn bg-[var(--foreground)] text-black">Log ind her</button>
+         <Link href="/login">
+           <button className="btn bg-[var(--foreground)] text-black">Log ind her</button>
+         </Link>
             <MdKeyboardDoubleArrowDown className="text-black text-5xl animate-bounce ml-4"/>
        </div>
     </article>

@@ -1,4 +1,4 @@
-import { getJSON } from "@/lib/general"
+import { getJSON } from "@/lib/dal/general"
 import Carousel from "./Carousel";
 
 export default async function Testimonials(){

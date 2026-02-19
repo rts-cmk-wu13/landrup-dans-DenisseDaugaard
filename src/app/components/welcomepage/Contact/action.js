@@ -1,4 +1,4 @@
-import { postJSON} from "@/lib/general";
+import { postJSON} from "@/lib/dal/general";
 import {contactScheme} from "@/lib/scheme";
 import z, { url } from "zod";
 

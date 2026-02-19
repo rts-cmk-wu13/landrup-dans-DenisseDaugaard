@@ -1,6 +1,6 @@
 import {newsLetterScheme} from "@/lib/scheme.js"
 import z from "zod"
-import { postJSON } from "@/lib/general"
+import { postJSON } from "@/lib/dal/general"
 export async function getNewsLetter(prevState, formData){
 
     const url = "http://localhost:4000/api/v1/newsletter"
