@@ -3,6 +3,7 @@ import Grups from "./components/welcomepage/Grups/Grups";
 import Hero from "./components/welcomepage/Hero";
 import NewsLetter from "./components/welcomepage/NewsLetter/NewsLetter.jsx";
 import Testimonials from "./components/welcomepage/Testimonials/Testimonials";
+import WecomeFooter from "./components/welcomepage/WecomeFooter";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Testimonials/>
         <Contact/>
       </main>
+      <WecomeFooter/>
     </div>
   );
 }
