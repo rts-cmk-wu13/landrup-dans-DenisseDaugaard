@@ -55,4 +55,11 @@ body .wrapper{
 .error_response{
   color: red;
   font-size: small;
+  font-weight: bold;
+}
+
+.success_response{
+  color: green;
+  font-size: small;
+  font-weight: bold;
 }
