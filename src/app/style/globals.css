@@ -16,6 +16,7 @@
   :root {
     --background: #003147;
     --foreground: #E9E9E9;
+    --secundary-background: #072D56;
   }
 }
 
@@ -62,4 +63,28 @@ body .wrapper{
   color: green;
   font-size: small;
   font-weight: bold;
+}
+
+
+/* ------------------------swiper section ----------- */
+
+#mySwiper{
+  position: relative;
+}
+#mySwiper .swiper-button-next{
+  color: var(--foreground);
+  border: 1px solid var(--foreground);
+  border-radius: 50%;
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 1rem;
+ 
+}
+#mySwiper .swiper-button-prev{
+  color: var(--foreground);
+  border: 1px solid var(--foreground);
+  border-radius: 50%;
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 1rem;
 }
