@@ -1,3 +1,4 @@
+import Contact from "./components/welcomepage/Contact/Contact";
 import Grups from "./components/welcomepage/Grups/Grups";
 import Hero from "./components/welcomepage/Hero";
 import NewsLetter from "./components/welcomepage/NewsLetter/NewsLetter.jsx";
@@ -11,6 +12,7 @@ export default function Home() {
         <Grups/>
         <NewsLetter/>
         <Testimonials/>
+        <Contact/>
       </main>
     </div>
   );

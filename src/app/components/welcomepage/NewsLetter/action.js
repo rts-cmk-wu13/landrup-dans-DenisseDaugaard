@@ -17,7 +17,7 @@ export async function getNewsLetter(prevState, formData){
 
         if(!result.success){
             return{
-                values:{email},
+                values:{email: ""},
                 errors:z.flattenError(result.error).fieldErrors, // erros from zod showed in the -> form client side/ browser.
             }
         }
@@ -28,7 +28,7 @@ export async function getNewsLetter(prevState, formData){
         if (!response.ok) {
             console.log('❌', response.status, response.data, response.text);
             return {
-                values: { email },
+                values: { email: "" },
                 errors: { error:"Det var ikke muligt at tilmelde, prøv igen senere."},
             };
         }

@@ -5,7 +5,7 @@ export default async function Testimonials(){
 
     const url = "http://localhost:4000/api/v1/testimonials"
     const { data, ok } = await getJSON(url)
-    console.log('data: 👩‍💻', data);
+    //console.log('data: 👩‍💻', data);
     
     if (!ok || !data) {
         return null
