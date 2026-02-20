@@ -1,4 +1,4 @@
-"use client"
+
 import Link from "next/link"
 import TopLogo from "@/app/components/login/TopLogo"
 import LoginForm from "@/app/login/LoginForm"

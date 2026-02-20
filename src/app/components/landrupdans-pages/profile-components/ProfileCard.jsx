@@ -11,7 +11,7 @@ export default function ProfileCard({data}) {
                 <FaUserLarge className="text-[var(--background)] text-[3rem]"  />
                 <div>
                     <h2 className="text-[var(--light-gray)]">{data.firstname} {data.lastname}</h2>
-                    <p className="text-[var(--light-gray)]">{data.role}</p>
+                    <p className="text-[var(--light-gray)]">{data.role === "default" ? "Medlem" : data.role}</p>
                 </div>
             </section>
 
@@ -19,8 +19,8 @@ export default function ProfileCard({data}) {
                 <h2 className="text-xl mb-4">Tilmeldte hold</h2>
                 {data.activities.map((activity, index) => (
                 <div key={index} className="bg-[var(--light-blue)] rounded-[0.75rem] p-4 text-[var(--background)]">
-                    <h3 className="text-xl font-semibold mb-4">Hold 1</h3>
-                    <p className="mb-4">time</p>
+                    <h3 className="text-xl font-semibold mb-4">{activity.name}</h3>
+                    <p className="mb-4">{activity.weekday.charAt(0).toUpperCase() + activity.weekday}  {activity.time} </p>
                     <button className="btn bg-[var(--background)] text-[var(--foreground)]">Vis hold</button>
                 </div>
                 ))}

@@ -2,12 +2,11 @@
 import { cookies } from "next/headers"; 
 
 export async function getUserById() {
+
     const cookieStore = await cookies()
     const token = cookieStore.get("token")?.value
     const id = cookieStore.get("userId")?.value
-    console.log('🍪', id, token);
     
-
      try{
 
 //   if(!id) {
@@ -41,13 +40,14 @@ export async function getUserById() {
 
 
     return { ok: res.ok, status: res.status, data };
+
   } catch (error) {
-    console.log("☠️ Error fetching user data:", error.message);
     
     return {
       ok: false,
+      status: 500,
       data: null, 
-      text: String(error)};
+      text: "Det var ikke muligt at hente brugerdata, prøv igen senere." || String(error)};
   }
  
 
