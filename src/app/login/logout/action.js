@@ -13,6 +13,7 @@ export default async function LogoutAction() {
 
     cookieStore.delete("token");
     cookieStore.delete("userId");
+    if(cookieStore.has("role")) cookieStore.delete("role");
 
     redirect("/login");
     

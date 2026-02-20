@@ -1,6 +1,7 @@
-import Image from "next/image"
+import Image from "next/image";
+import Link from "next/link";
 
-export default function ActivityDetailsCard({ data }){
+export default function ActivityDetailsCard({ data, isLoggedIn, isInstructor }) {
 
     return(
         <>
@@ -12,6 +13,7 @@ export default function ActivityDetailsCard({ data }){
                 height={400}
                 unoptimized
                 loading="eager"
+                className="object-cover w-full h-full"
             />
         </figure>
 
@@ -21,7 +23,12 @@ export default function ActivityDetailsCard({ data }){
             <p>{data.description}</p>
         </section>
 
-        <button className=" absolute right-12 top-[40%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Tilmeld</button>
+        {isLoggedIn && (
+            <button className=" absolute right-12 top-[40%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Tilmeld</button>
+        )}
+        {isInstructor && (
+            <Link href={`/landrupdans/profile`} className=" absolute right-12 top-[50%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Rediger</Link>
+        )}
         </>
     )
 }

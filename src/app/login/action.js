@@ -53,6 +53,15 @@ export async function loginUser(prevState, formData) {
             }
             console.log('📩', response.data);
 
+            if(response.data.role === "instructor"){
+
+                cookieStore.set("token", response?.data?.token);
+                cookieStore.set("userId", response?.data?.userId);
+                cookieStore.set("role", response?.data?.role);
+                return redirect("/landrupdans/profile")
+                
+            }
+
             cookieStore.set("token", response?.data?.token);
             cookieStore.set("userId", response?.data?.userId);
 
