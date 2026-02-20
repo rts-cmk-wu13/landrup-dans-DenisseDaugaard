@@ -1,8 +1,8 @@
 import { FaUserLarge } from "react-icons/fa6";
-
+import LogoutButton from "@/app/login/logout/LogoutButton";
 export default function ProfileCard({data}) {
     return(
-        <article>
+        <article className="flex flex-col">
             <header className="flex justify-center p-4 text-2xl">
                 <h1>Min profil</h1>
             </header>
@@ -25,6 +25,7 @@ export default function ProfileCard({data}) {
                 </div>
                 ))}
             </section>
+            <LogoutButton />
         </article>
     )
 }

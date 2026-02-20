@@ -8,8 +8,8 @@ export default async function LogoutButton() {
     const isLoggedInd = cookieStore.has("token");
 
     return(
-        <form action={LogoutAction}>
-           {isLoggedInd ?(<button className="bg-red-500 rounded p-2 m-4 flex justify-self-end" type="submit">Logout</button>) : null}
+        <form className="flex justify-center mt-6" action={LogoutAction}>
+           {isLoggedInd ?(<button className="bg-red-500 rounded p-2 m-4" type="submit">Logout</button>) : null}
         </form>
     )
 }

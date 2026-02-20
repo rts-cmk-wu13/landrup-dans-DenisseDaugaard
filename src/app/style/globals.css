@@ -90,3 +90,12 @@ body .wrapper{
   position: absolute;
   bottom: 1rem;
 }
+
+/* ----------search bar--------------- */
+
+.search_active{
+ border-radius: 0.75rem;
+ border-bottom-right-radius: 0;
+  background-color:#3B5D6C;
+  padding: 1rem;
+}

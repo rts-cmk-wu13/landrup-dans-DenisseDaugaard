@@ -1,7 +1,6 @@
 import ErrorMessage from "@/app/components/errors/ErrorMesage";
 import ProfileCard from "@/app/components/landrupdans-pages/profile-components/ProfileCard"
 import { getUserById } from "@/lib/dal/userById"
-import LogoutButton from "@/app/login/logout/LogoutButton";
 import { notFound } from "next/navigation"
 
 export default async function Calendar(){
@@ -14,8 +13,8 @@ export default async function Calendar(){
      <ErrorMessage
      title="Fejl"
      message={data.text} 
-     href="/"
-     linkText="Gå tilbage til forsiden"
+     href="/login"
+     linkText="Gå til login"
      />
     )
   }
@@ -26,7 +25,6 @@ export default async function Calendar(){
     return(
         <>
         <ProfileCard data={data?.data} />
-        <LogoutButton/>
         </>
     )
 }

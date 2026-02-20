@@ -2,7 +2,6 @@
 
 import { CreateUserScheme } from "@/lib/scheme";
 import { CreateUserRequest } from "@/lib/dal/createUser";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const url = "http://localhost:4000/api/v1/users";
@@ -75,5 +74,4 @@ export async function CreateUser(_, formData) {
             }
         }
 
-       // redirect("/login");
 }

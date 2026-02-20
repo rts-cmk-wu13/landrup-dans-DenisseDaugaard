@@ -9,13 +9,6 @@ export async function getUserById() {
     
      try{
 
-//   if(!id) {
-//     throw new Error("Det var ikke muligt at finde brugerdata, prøv igen senere");
-//   }
-//   if(!(/^\d+$/.test(id))) {
-//     throw new Error("Det id, der blev brugt, er ikke et tal, angiv venligst et gyldigt id");
-//   }
-
     const url = `http://localhost:4000/api/v1/users/${id}`;
     const res = await fetch(url,{
         headers: {
@@ -47,7 +40,7 @@ export async function getUserById() {
       ok: false,
       status: 500,
       data: null, 
-      text: "Det var ikke muligt at hente brugerdata, prøv igen senere." || String(error)};
+      text: "Det var ikke muligt at hente brugerdata, prøv at logge ind igen." || String(error)};
   }
  
 
