@@ -10,13 +10,12 @@ export async function loginUser(prevState, formData) {
 
     const url = "http://localhost:4000/auth/token"
     
-    const username = formData.get("username")
-    const password = formData.get("password")
+    const username = formData.get("username");
+    const password = formData.get("password");
     const cookieStore = await cookies();
     
         if(username === prevState.values.username){
             console.log('skip request no data sent');
-            
             return prevState
         }
     

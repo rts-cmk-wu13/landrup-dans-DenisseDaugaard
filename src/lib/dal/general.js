@@ -1,5 +1,5 @@
 
-
+// This is aglobal POST FUNCTION .
 export async function postJSON(url, body) {
   try {
     const res = await fetch(url, {
@@ -33,7 +33,7 @@ export async function postJSON(url, body) {
 
 
 
-
+//THIS IS A GLOBAL GET FUNCTION
 export async function getJSON(url) {
   try{
     const res = await fetch(url, { cache: "no-store" });

@@ -1,17 +1,18 @@
 "use server";
 
 import { CreateUserScheme } from "@/lib/scheme";
-import { postJSON } from "@/lib/dal/general";
+import { CreateUserRequest } from "@/lib/dal/createUser";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-const URL = "http://localhost:4000/api/v1/users";
+const url = "http://localhost:4000/api/v1/users";
 
-export async function CreateUser(formData) {
+export async function CreateUser(_, formData) {
   const inputData = Object.fromEntries(formData.entries());
+  console.log(inputData, 'inputData');
 
   const values = {
-    name: inputData.name ?? "",
+    firstname: inputData.firstname ?? "",
     lastname: inputData.lastname ?? "",
     username: inputData.username ?? "",
     age: inputData.age ?? "",
@@ -30,7 +31,7 @@ export async function CreateUser(formData) {
   const result = CreateUserScheme.safeParse(inputData);
 
   if (!result.success) {
-    console.log('error');
+    //console.log('error');
       return {
           values,
           errors: z.flattenError(result.error).fieldErrors
@@ -44,28 +45,35 @@ export async function CreateUser(formData) {
              role: "default" 
             };
 
-        console.log(payload, '☺️');
+        //console.log(payload, '☺️');
     
 
-   
+    const response = await CreateUserRequest(url, payload);
 
+        if (!response.ok) {
+           // console.log('something went wrong !! ☠️');
+        return {
+            ok: false,
+            status: response.status,
+            serverResponse: { error: response.data?.message || "Der skete en fejl ved oprettelse af brugeren, prøv igen senere." },
+        };
+        }
+ 
 
-//   const response = await postJSON(URL, payload);
+        if (!response?.data) {
+                //console.log('no data recived from the server');
+            return {
+            values,
+            serverResponse: { error: "Der skete en fejl ved indlæsning af data, prøv igen senere." },
+            };
+        }else{
+                //console.log("now you have  a user !! ");
+            
+            return{
+                ok: true,
+               serverResponse: { success: "Brugeren blev oprettet, du bliver nu omdirigeret til login siden" }
+            }
+        }
 
-//   // Map API errors into form errors
-//   if (response?.status === 401) {
-//     return {
-//       values,
-//       errors: { error: "Ugyldigt brugernavn eller adgangskode" },
-//     };
-//   }
-
-//   if (!response?.data) {
-//     return {
-//       values,
-//       errors: { error: "Der skete en fejl ved indlæsning af data, prøv igen senere." },
-//     };
-//   }
-
-//   redirect("/login");
+       // redirect("/login");
 }
