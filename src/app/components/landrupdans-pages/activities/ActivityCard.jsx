@@ -1,8 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ActivityCard({ data }) {
   return (
-    <div className="relative w-[300px] h-[300px] rounded-3xl rounded-br-none  overflow-hidden mb-8">
+    <Link href={`/landrupdans/activities/${data.id}`} className="relative block w-[300px] h-[300px] rounded-3xl rounded-br-none  overflow-hidden mb-8">
     
       <Image
         src={data.asset.url}
@@ -22,6 +23,6 @@ export default function ActivityCard({ data }) {
         </p>
       </div>
 
-    </div>
+    </Link>
   );
 }

@@ -9,7 +9,11 @@ import { usePathname } from "next/navigation";
 export default function Footer(){
 
     const pathname = usePathname();
-    const isActive = (path) => pathname === path ? "text-black" : "text-[var(--light-gray)]";
+   const isActive = (path) =>
+  pathname === path || pathname.startsWith(path + "/")
+    ? "text-black"
+    : "text-[var(--light-gray)]";
+    
     const footerClass = [
         "fixed bottom-0 left-0 right-0 z-50",
         "bg-[#F2F2F2] border-t border-[#D9D9D9]",

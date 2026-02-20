@@ -8,9 +8,7 @@ export default async function Activities() {
 
     const activities = await getJSON(url);
     const data = activities.data;
-    console.log(data);
-    
-
+    //console.log(data);
 
     return(
         <article className="p-6">

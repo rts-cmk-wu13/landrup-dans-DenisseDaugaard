@@ -1,7 +1,7 @@
 "use server";
 
 import { CreateUserScheme } from "@/lib/scheme";
-import { CreateUserRequest } from "@/lib/dal/createUser";
+import { CreateUserRequest } from "@/lib/dal/users/createUser";
 import { z } from "zod";
 
 const url = "http://localhost:4000/api/v1/users";
