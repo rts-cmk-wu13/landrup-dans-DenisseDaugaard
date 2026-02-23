@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Hero(){
     return(
-    <article className="hero h-[380px] h-[700px]" style={{backgroundImage:"url('/app_images/heroimg.jpg')", backgroundSize:"cover", backgroundPosition:"center"}}>
+    <div className="hero h-[380px] h-[700px]" style={{backgroundImage:"url('/app_images/heroimg.jpg')", backgroundSize:"cover", backgroundPosition:"center"}}>
        <section className="flex flex-col gap-4">
         <Image
         src="/app_images/logo.svg"
@@ -28,6 +28,6 @@ export default function Hero(){
          </Link>
             <MdKeyboardDoubleArrowDown className="text-black text-5xl animate-bounce ml-4"/>
        </div>
-    </article>
+    </div>
     )
 }

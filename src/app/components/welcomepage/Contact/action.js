@@ -1,6 +1,6 @@
 import { postJSON} from "@/lib/dal/general";
 import {contactScheme} from "@/lib/scheme";
-import z, { url } from "zod";
+import z from "zod";
 
 
 export async function sendMessage(prevState, formData) {
@@ -11,7 +11,7 @@ export async function sendMessage(prevState, formData) {
 
     const url = "http://localhost:4000/api/v1/messages";
 
-    console.log(name, email,message);
+    //console.log(name, email,message);
     
 
     if(name === prevState.values.name 
@@ -42,7 +42,7 @@ export async function sendMessage(prevState, formData) {
         });
 
         if (!response.ok) {
-            console.log('❌', response.status, response.data, response.text);
+            //console.log('❌', response.status, response.data, response.text);
             return {
                 values: { name:"", email: "", message: "" },
                 errors: { error:"Det var ikke muligt at sende beskeden, prøv igen senere."},
@@ -50,7 +50,7 @@ export async function sendMessage(prevState, formData) {
         }
 
         if(response.ok){
-            console.log('😁', response.status );
+            //console.log('😁', response.status );
             // change to a toast notification or something else that is not an error message, since this is a success message.
              return {
                 values: { name: "", email: "", message: "" },

@@ -4,7 +4,7 @@ import { postJSON } from "@/lib/dal/general"
 export async function getNewsLetter(prevState, formData){
 
     const url = "http://localhost:4000/api/v1/newsletter"
-    const email = formData.get("email")
+    const email = formData.get("email");
     // console.log('📩',email);
 
     if(email === prevState.values.email){
@@ -26,7 +26,7 @@ export async function getNewsLetter(prevState, formData){
        const response = await postJSON(url, { email: result.data.email });
 
         if (!response.ok) {
-            console.log('❌', response.status, response.data, response.text);
+            // console.log('❌', response.status, response.data, response.text);
             return {
                 values: { email: "" },
                 errors: { error:"Det var ikke muligt at tilmelde, prøv igen senere."},
@@ -34,7 +34,7 @@ export async function getNewsLetter(prevState, formData){
         }
 
         if(response.ok){
-            console.log('😁', response.status );
+            // console.log('😁', response.status );
             // change to a toast notification or something else that is not an error message, since this is a success message.
              return {
                 values: { email: "" },

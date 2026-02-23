@@ -1,6 +1,7 @@
 import z from "zod"
 
 export const baseScheme = z.object({
+    name: z.string('Indtast venligst dit navn').min(3, "Navn skal være mindst 3 karakterer"),
     firstname: z.string('Indtast venligst dit navn').min(3, "Navn skal være mindst 3 karakterer"),
     lastname: z.string('Indtast venligst dit efternavn').min(3, "Efternavn skal være mindst 3 karakterer"),
     age: z.coerce.number({required_error: "Indtast venligst din alder",invalid_type_error: "Indtast venligst din alder",})
@@ -32,4 +33,5 @@ export const CreateUserScheme = baseScheme
   .omit({
     message: true,
     email: true,
+    name: true,
   })

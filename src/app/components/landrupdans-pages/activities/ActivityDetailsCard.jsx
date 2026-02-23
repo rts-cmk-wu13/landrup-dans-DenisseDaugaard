@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import SignUpButton from "./SignUpButtom";
+import { is } from "zod/v4/locales";
 
-export default function ActivityDetailsCard({ data, isLoggedIn, isInstructor }) {
+export default function ActivityDetailsCard({ data, isLoggedIn, isInstructor, isUserInAge }) {
 
     return(
         <>
@@ -23,11 +25,15 @@ export default function ActivityDetailsCard({ data, isLoggedIn, isInstructor }) 
             <p>{data.description}</p>
         </section>
 
-        {isLoggedIn && (
-            <button className=" absolute right-12 top-[40%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Tilmeld</button>
-        )}
+        {isLoggedIn && isUserInAge && <SignUpButton/>}  
+        {/* {console.log(isLoggedIn)}  */}
+
+        {isLoggedIn && !isUserInAge && <p 
+        className="absolute left-12 p-2 rounded top-[45%] bg-white/80 text-red-500 font-semibold">
+            Du desværre opfylder ikke alderskravet for denne aktivitet.</p>}
+
         {isInstructor && (
-            <Link href={`/landrupdans/profile`} className=" absolute right-12 top-[50%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Rediger</Link>
+            <Link href={`/landrupdans/profile`} className=" absolute right-12 top-[5%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Rediger</Link>
         )}
         </>
     )

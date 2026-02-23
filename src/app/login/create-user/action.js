@@ -3,13 +3,14 @@
 import { CreateUserScheme } from "@/lib/scheme";
 import { CreateUserRequest } from "@/lib/dal/users/createUser";
 import { z } from "zod";
+import { headers } from "next/headers";
 
-const url = "http://localhost:4000/api/v1/users";
 
 export async function CreateUser(_, formData) {
   const inputData = Object.fromEntries(formData.entries());
-  console.log(inputData, 'inputData');
+  //console.log(inputData, 'inputData');
 
+  const url = "http://localhost:4000/api/v1/users";
   const values = {
     firstname: inputData.firstname ?? "",
     lastname: inputData.lastname ?? "",
@@ -18,7 +19,8 @@ export async function CreateUser(_, formData) {
     password: inputData.password ?? "",
     confirmPassword: inputData.confirmPassword ?? "",
   };
-
+  
+ 
   if(values.password !== values.confirmPassword){
     return {
       values,
@@ -26,17 +28,16 @@ export async function CreateUser(_, formData) {
     };
   }
 
-
   const result = CreateUserScheme.safeParse(inputData);
 
   if (!result.success) {
-    //console.log('error');
+    console.log('validation failed ☠️', result.error);
       return {
           values,
           errors: z.flattenError(result.error).fieldErrors
         }; 
     }
-        
+    
     //remove confirmPassword from payload and add a role: "default" before sending to API
         const { confirmPassword, ...res } = result.data;
         const payload = {
@@ -45,12 +46,10 @@ export async function CreateUser(_, formData) {
             };
 
         //console.log(payload, '☺️');
-    
 
     const response = await CreateUserRequest(url, payload);
-
         if (!response.ok) {
-           // console.log('something went wrong !! ☠️');
+           console.log('something went wrong !! ☠️');
         return {
             ok: false,
             status: response.status,
@@ -59,14 +58,14 @@ export async function CreateUser(_, formData) {
         }
  
 
-        if (!response?.data) {
-                //console.log('no data recived from the server');
+        if (!response.data) {
+                console.log('no data recived from the server');
             return {
             values,
             serverResponse: { error: "Der skete en fejl ved indlæsning af data, prøv igen senere." },
             };
         }else{
-                //console.log("now you have  a user !! ");
+                console.log("now you have  a user !! ");
             
             return{
                 ok: true,

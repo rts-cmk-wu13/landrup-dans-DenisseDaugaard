@@ -1,10 +1,27 @@
 import { FaUserLarge } from "react-icons/fa6";
 import LogoutButton from "@/app/login/logout/LogoutButton";
-export default function ProfileCard({data}) {
+import SessionDurationMessage from "@/app/landrupdans/profile/SessionDurationMessage";
+import { cookies } from "next/headers";
+
+
+export default async function ProfileCard({data}) {
+    const cookieStore = await cookies();
+    const sessionDuration = Number(cookieStore?.get("expirationTime")?.value) || 0;
+    //console.log(sessionDuration)
+        const formattedDuration = new Date(sessionDuration).toLocaleString("da-DK", {
+            dateStyle:"long",
+            timeStyle:"short"
+        }
+    )
+
     return(
         <article className="flex flex-col">
-            <header className="flex justify-center p-4 text-2xl">
-                <h1>Min profil</h1>
+            <header className="grid grid-cols-3 p-4 text-2xl">
+                <h1 className="col-2">Min profil</h1>
+                <SessionDurationMessage 
+                title="Session Varighed" 
+                message={`Din session udløber ${formattedDuration}.`}
+                style="right-4 text-sm bg-red-500/90 p-2 rounded-lg transition-all duration-300 translate-y-2/3"/>
             </header>
 
             <section className="bg-[var(--foreground)] w-full flex flex-col items-center gap-4 p-6 text-center">

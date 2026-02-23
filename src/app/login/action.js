@@ -51,21 +51,20 @@ export async function loginUser(prevState, formData) {
                    errors: { error:"Der skete en fejl ved indlæsning af data, prøv igen senere."},
                  };
             }
-            console.log('📩', response.data);
 
-            if(response.data.role === "instructor"){
+            //console.log('📩', response.data);
 
-                cookieStore.set("token", response?.data?.token);
-                cookieStore.set("userId", response?.data?.userId);
-                cookieStore.set("role", response?.data?.role);
-                return redirect("/landrupdans/profile")
-                
+            const { token, userId, role, validUntil } = response.data;
+
+            cookieStore.set("token", token);
+            cookieStore.set("userId", userId);
+            cookieStore.set("expirationTime", validUntil);    
+            
+            if (role === "instructor") {
+            cookieStore.set("role", role);
             }
-
-            cookieStore.set("token", response?.data?.token);
-            cookieStore.set("userId", response?.data?.userId);
-
-            return redirect("/landrupdans/profile") 
+            
+            return redirect("/landrupdans/profile");
 
 
 }

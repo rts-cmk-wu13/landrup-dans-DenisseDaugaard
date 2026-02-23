@@ -1,21 +1,25 @@
-import Contact from "./components/welcomepage/Contact/Contact";
-import Grups from "./components/welcomepage/Grups/Grups";
-import Hero from "./components/welcomepage/Hero";
-import NewsLetter from "./components/welcomepage/NewsLetter/NewsLetter.jsx";
-import Testimonials from "./components/welcomepage/Testimonials/Testimonials";
-import WecomeFooter from "./components/welcomepage/WecomeFooter";
 
-export default function Home() {
+import Hero from "./components/landing-page/Hero";
+import WecomeFooter from "./components/landing-page/WecomeFooter";
+import AppMain from "./components/welcomepage/AppMain";
+import {cookies} from "next/headers";
+import { redirect } from "next/navigation";
+
+
+export default async function LandingPage() {
+
+  const cookieStore = await cookies();
+  if(cookieStore.get("token")){
+    redirect("/landrupdans/profile")
+  }
+
+
   return (
     <div className="wrapper">
       <main className="w-full">
-        <Hero/>
-        <Grups/>
-        <NewsLetter/>
-        <Testimonials/>
-        <Contact/>
+        <AppMain children={<Hero/>}/>
       </main>
-      <WecomeFooter/>
+       <WecomeFooter/>
     </div>
   );
 }

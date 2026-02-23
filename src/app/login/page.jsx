@@ -3,7 +3,8 @@ import Link from "next/link"
 import TopLogo from "@/app/components/login/TopLogo"
 import LoginForm from "@/app/login/LoginForm"
 
-export default function Login() {
+export default  async function Login() {
+ 
     return(
       <article className="">
         <TopLogo />

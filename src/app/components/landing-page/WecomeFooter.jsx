@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function WecomeFooter() {
     return(
-    <footer className="py-4 text-center my-8">
+<section  className="py-4 text-center my-8">
         <div>
             <Image src="/app_images/logo.svg" 
             alt="Landrup Dans Logo" 
@@ -19,6 +19,7 @@ export default function WecomeFooter() {
                 Tlf. 3540 4550
             </span>
         </div>
-    </footer>
+</section>
+
     )
 }

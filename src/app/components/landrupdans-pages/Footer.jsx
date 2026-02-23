@@ -9,8 +9,9 @@ import { usePathname } from "next/navigation";
 export default function Footer(){
 
     const pathname = usePathname();
-   const isActive = (path) =>
-  pathname === path || pathname.startsWith(path + "/")
+    const isActiveExact = (path) => pathname === path ? "text-black" : "text-[var(--light-gray)]";
+
+   const isActiveNested = (path) => pathname === path || pathname.startsWith(path + "/")
     ? "text-black"
     : "text-[var(--light-gray)]";
     
@@ -22,23 +23,22 @@ export default function Footer(){
 
     return(
         <footer className={footerClass}>
-
              <nav className="mx-auto max-w-md">
                 <ul className="flex items-center justify-around py-2">
                     <li>
-                       <Link href="/" className={`flex flex-col items-center ${isActive("/")}`}>
+                       <Link href="/landrupdans" className={`flex flex-col items-center ${isActiveExact("/landrupdans")}`}>
                         <FiHome size={24} />
                         <span className="ml-2">Home</span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/landrupdans/activities" className={`flex flex-col items-center ${isActive("/landrupdans/activities")}`}>
+                        <Link href="/landrupdans/activities" className={`flex flex-col items-center ${isActiveNested("/landrupdans/activities")}`}>
                             <FaListUl size={24} />
                             <span className="ml-2">Aktiviteter</span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/landrupdans/profile" className={`flex flex-col items-center ${isActive("/landrupdans/profile")}`}>
+                        <Link href="/landrupdans/profile" className={`flex flex-col items-center ${isActiveExact("/landrupdans/profile")}`}>
                             <FaUserLarge size={24} />
                             <span className="ml-2">Profil</span>
                         </Link>

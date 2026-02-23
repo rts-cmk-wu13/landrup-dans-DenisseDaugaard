@@ -1,20 +1,23 @@
 
 // This is aglobal POST FUNCTION .
-export async function postJSON(url, body) {
+export async function postJSON(url, body , token) {
   try {
     const res = await fetch(url, {
       method: "POST",
       // this says that the body of the request is in JSON format, and the server should expect JSON data.
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        ...(token && { "Authorization": `Bearer ${token}` })
+      },
       body: JSON.stringify(body),
     });
 
-    const contentType = res.headers.get("content-type") || "";
+    const contentTypeRes = res.headers.get("content-type") || "";
     let data = null;
     let text = null;
 
     //this checks if the response from the server is in JSON format
-    if (contentType.includes("application/json")) {
+    if (contentTypeRes.includes("application/json")) {
       data = await res.json();
     } else {
       text = await res.text();

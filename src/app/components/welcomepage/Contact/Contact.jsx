@@ -16,7 +16,7 @@ export default function Contact() {
   //console.log(state);
   
   return (
-    <section className="p-4">
+    <section className="p-8">
       <h1 className="main_title">Kontakt os</h1>
 
       <form noValidate action={formAction}>

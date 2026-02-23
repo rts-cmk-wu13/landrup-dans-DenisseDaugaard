@@ -32,13 +32,13 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-ubuntu), Arial, sans-serif;
 }
 
-body .wrapper{
+/* body .wrapper{
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
   width: 100%;
-}
+} */
 
 .btn {
   border: none;

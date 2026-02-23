@@ -11,10 +11,10 @@ export default function LoginForm(){
    
      const [state, formAction, isPending] = useActionState(loginUser, initialState);
      //console.log(state);
-     
-
+    
     return(
-         <form noValidate action={formAction}>
+        <>
+        <form noValidate action={formAction}>
             <div>
                 <div className="relative flex flex-col mb-6">
                 <input
@@ -51,8 +51,8 @@ export default function LoginForm(){
                 </button>
             </div>
 
-
-      </form>
+        </form>
+        </>
     )
 
 }

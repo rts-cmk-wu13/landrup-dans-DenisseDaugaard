@@ -13,7 +13,7 @@ export default async function Testimonials(){
 
     if(data){
         return(
-        <article className="bg-[var(--secundary-background)]">
+        <article className="bg-[var(--secundary-background)] p-8 mt-8">
             <h1 className="main_title text-center">Det siger vores kunder om os</h1>
             <Carousel data={data}/>
         </article>
