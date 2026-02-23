@@ -2,6 +2,7 @@ import { FaUserLarge } from "react-icons/fa6";
 import LogoutButton from "@/app/login/logout/LogoutButton";
 import SessionDurationMessage from "@/app/landrupdans/profile/SessionDurationMessage";
 import { cookies } from "next/headers";
+import ActivityCard from "@/app/components/landrupdans-pages/profile-components/ClassCard";
 
 
 export default async function ProfileCard({data}) {
@@ -13,6 +14,8 @@ export default async function ProfileCard({data}) {
             timeStyle:"short"
         }
     )
+    //console.log(data);
+    
 
     return(
         <article className="flex flex-col">
@@ -35,11 +38,7 @@ export default async function ProfileCard({data}) {
             <section className="p-6">
                 <h2 className="text-xl mb-4">Tilmeldte hold</h2>
                 {data.activities.map((activity, index) => (
-                <div key={index} className="bg-[var(--light-blue)] rounded-[0.75rem] p-4 text-[var(--background)]">
-                    <h3 className="text-xl font-semibold mb-4">{activity.name}</h3>
-                    <p className="mb-4">{activity.weekday.charAt(0).toUpperCase() + activity.weekday}  {activity.time} </p>
-                    <button className="btn bg-[var(--background)] text-[var(--foreground)]">Vis hold</button>
-                </div>
+                    <ActivityCard key={index} activity={activity} index={index} />
                 ))}
             </section>
             <LogoutButton />

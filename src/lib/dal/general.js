@@ -64,3 +64,43 @@ export async function getJSON(url) {
       text: String(error)};
   }
 }
+
+
+
+export async function deleteJSON(url, token) {
+  try {
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: { 
+        "Content-Type": "application/json",
+       "Authorization": `Bearer ${token}`
+      },
+    })
+
+
+    const contentTypeRes = res.headers.get("content-type") || "";
+    let data = null;
+    let text = null;
+    if (contentTypeRes.includes("application/json")) {
+      data = await res.json();
+    }
+
+    if(res.status !== 200) {
+      return{
+        ok: false,
+        data: null,
+        text: "Der skete en fejl ved sletning af data, prøv igen senere"
+      }
+    }
+
+   
+    return { ok: res.ok, status: res.status, data, text };
+  } catch (error) {
+    return {
+      ok: false,
+      data: null, 
+      text: "Der skete en fejl ved indlæsning af data" };
+  }
+
+  
+}
