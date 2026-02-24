@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { postJSON } from "@/lib/dal/general";
 import { redirect } from "next/navigation";
+import { Activity } from "react";
 
 export async function SignUpToAnActivity(_, formData) {
   const cookieStore = await cookies();
@@ -10,13 +11,12 @@ export async function SignUpToAnActivity(_, formData) {
   const userId = cookieStore.get("userId")?.value;
 
   const activityId = formData.get("activityId");
-  console.log(activityId, '🤓');
+  //console.log(activityId, '🤓');
   
-
 
   if (!token || !userId) {
     return {
-      serverResponse: { message: "Du er ikke logget ind. Log ind og prøv igen." },
+      serverResponse: { message: "Er du logget ind? Log ind og prøv igen." },
     };
   }
 
@@ -25,9 +25,10 @@ export async function SignUpToAnActivity(_, formData) {
   const response = await postJSON(url, {}, token);
 
   if (!response.ok) {
+    //console.log('☠️', response);
     return {
       serverResponse: {
-        message: response.data?.message || "Der skete en fejl ved tilmelding. Prøv igen senere.",
+        message: "Der skete en fejl ved tilmelding. Prøv igen senere.",
       },
     };
   }

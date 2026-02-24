@@ -7,6 +7,7 @@ export default function LoginForm(){
     const initialState = {
        values: { username: "", password: "" },
        errors: {},
+       serverMessage:{},
      };
    
      const [state, formAction, isPending] = useActionState(loginUser, initialState);
@@ -41,7 +42,10 @@ export default function LoginForm(){
                 {state?.errors?.error && (
                   <span className="error_response mt-2 ">{state.errors.error}</span>
                 )}
-            
+                {state?.serverMessage?.error && (
+                  <span className="error_response mt-2 ">{state.serverMessage.error}</span>
+                )}
+                
                 <button
                     className="btn p-4 mt-4 bg-white disabled:bg-gray-300 disabled:opacity-50 text-black text-sm flex justify-self-center"
                     disabled={isPending}

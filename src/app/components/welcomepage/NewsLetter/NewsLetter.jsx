@@ -6,6 +6,7 @@ export default function NewsLetter() {
   const initialState = {
     values: { email: "" },
     errors: {},
+    serverMessage:{}
   };
 
   const [state, formAction, isPending] = useActionState(getNewsLetter, initialState);
@@ -38,12 +39,12 @@ export default function NewsLetter() {
             </button>
         </div>
 
-        {state?.errors?.error && (
-          <span className="error_response mt-2">{state.errors.error}</span>
+        {state?.serverMessage?.error && (
+          <span className="error_response mt-2">{state.serverMessage.error}</span>
         )}
     
-        {state?.errors?.success && (
-          <span className="success_response mt-2">{state.errors.success}</span>
+        {state?.serverMessage?.success && (
+          <span className="success_response mt-2">{state.serverMessage.success}</span>
         )}
 
       </form>

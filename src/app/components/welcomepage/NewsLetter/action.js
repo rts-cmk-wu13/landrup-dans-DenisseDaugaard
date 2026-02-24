@@ -3,11 +3,10 @@ import z from "zod"
 import { postJSON } from "@/lib/dal/general"
 export async function getNewsLetter(prevState, formData){
 
-    const url = "http://localhost:4000/api/v1/newsletter"
+    const url = "http://localhost:4000/api/v1/newsletter";
     const email = formData.get("email");
-    // console.log('📩',email);
 
-    if(email === prevState.values.email){
+    if(email === prevState?.values?.email){
         return prevState
     }
 
@@ -25,23 +24,30 @@ export async function getNewsLetter(prevState, formData){
 
        const response = await postJSON(url, { email: result.data.email });
 
+       if(response.status === 404){
+           return{
+               values: { email: "" },
+               serverMessage: { error:"Ressourcen ikke fundet, kontakt administrator"},
+           }
+       }
+
         if (!response.ok) {
-            // console.log('❌', response.status, response.data, response.text);
+            //console.log('❌',response);
             return {
                 values: { email: "" },
-                errors: { error:"Det var ikke muligt at tilmelde, prøv igen senere."},
+                serverMessage: { error:` ${response.text} ,prøve igen senere` || "Der var ikke muligt at tilmelde, prøv igen senere" },
             };
         }
 
+
         if(response.ok){
-            // console.log('😁', response.status );
-            // change to a toast notification or something else that is not an error message, since this is a success message.
+            //console.log('😁', response);
              return {
                 values: { email: "" },
-                errors: { success:"Tilmeldt nyhedsbrev!" },
+                serverMessage: { success:"Tilmeldt nyhedsbrev!" },
             }; 
         }
-        
+
         return response.data
 }
         

@@ -41,20 +41,27 @@ export async function sendMessage(prevState, formData) {
             message: result.data.message,
         });
 
-        if (!response.ok) {
-            //console.log('❌', response.status, response.data, response.text);
+        if(response.status === 404){
             return {
                 values: { name:"", email: "", message: "" },
-                errors: { error:"Det var ikke muligt at sende beskeden, prøv igen senere."},
+                serverMessage: { error:"Ressourcen ikke fundet. Kontakt administrator."},
+            };
+        }
+
+        if (!response.ok) {
+            //console.log('❌', response);
+            return {
+                values: { name:"", email: "", message: "" },
+                serverMessage: { error: ` ${response.text} ,prøve igen senere` || "Det var ikke muligt at sende beskeden, prøv igen senere."},
             };
         }
 
         if(response.ok){
-            //console.log('😁', response.status );
+            //console.log('😁', response );
             // change to a toast notification or something else that is not an error message, since this is a success message.
              return {
                 values: { name: "", email: "", message: "" },
-                errors: { success:"Beskeden blev sendt!" },
+                serverMessage: { success:"Beskeden blev sendt!" },
             }; 
         }
         

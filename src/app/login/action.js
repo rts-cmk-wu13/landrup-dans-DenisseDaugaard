@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 
 export async function loginUser(prevState, formData) {
 
-    const url = "http://localhost:4000/auth/token"
+    const url = "http://localhost:4000/auth/token";
     
     const username = formData.get("username");
     const password = formData.get("password");
@@ -36,20 +36,27 @@ export async function loginUser(prevState, formData) {
             { username: result.data.username, 
                 password: result.data.password 
             });
-    
-           
-           if(response.status === 401){
-               return {
-                   values: { username: "", password: "" },
-                  errors: { error:"Ugyldigt brugernavn eller adgangskode"},
-                };
-            }
-            
-            if(response.data === null){
+
+            if(response.status === 404){
                 return {
                     values: { username: "", password: "" },
-                   errors: { error:"Der skete en fejl ved indlæsning af data, prøv igen senere."},
-                 };
+                    serverMessage:{ error:"Resouces ikke fundet. Kontakt administrator"},
+                }
+            }
+
+            if(response.status === 401){
+                return {
+                    values: { username: "", password: "" },
+                    serverMessage:{ error:"Ugyldigt brugernavn eller adgangskode" || response.text},
+                }
+            }
+           
+           if(!response.ok){
+            console.log('❌', response);
+               return {
+                   values: { username: "", password: "" },
+                  serverMessage:{ error: `${response.text}, prøv igen senere` || "ugyldigt brugernavn eller adgangskode" },
+                };
             }
 
             //console.log('📩', response.data);

@@ -10,6 +10,7 @@ export default function Contact() {
         message:"",
      },
     errors: {},
+    serverMessage:{},
   };
 
   const [state, formAction, isPending] = useActionState(sendMessage, initialState);
@@ -56,12 +57,12 @@ export default function Contact() {
                 {state?.errors?.message && (
             <span className="error_response mt-2 absolute left-0 -bottom-6">{state.errors.message}</span>)}
             </div>
-            {state?.errors?.error && (
-              <span className="error_response mt-2">{state.errors.error}</span>
+            {state?.serverMessage?.error && (
+              <span className="error_response mt-2 mb-4">{state.serverMessage.error}</span>
             )}
         
-            {state?.errors?.success && (
-              <span className="success_response mt-2">{state.errors.success}</span>
+            {state?.serverMessage?.success && (
+              <span className="success_response mb-4">{state.serverMessage.success}</span>
             )}
 
             <button
