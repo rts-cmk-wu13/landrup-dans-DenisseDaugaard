@@ -37,7 +37,7 @@ export async function postJSON(url, body, token) {
   // GET
 export async function getJSON(url) {
   try{
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(url, { next: { revalidate: 3600 } });
     const contentType = res.headers.get("content-type") || "";
     let data = null;
     
