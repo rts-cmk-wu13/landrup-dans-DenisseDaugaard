@@ -12,6 +12,7 @@ export default function Hero(){
         width={64}
         height={64}
         className="mx-auto mt-12"
+        loading="lazy"
         />
         <Image
         src="/app_images/title.svg"
@@ -19,6 +20,7 @@ export default function Hero(){
         width={300}
         height={300}
         className="flex justify-self-start mt-6"
+        loading="lazy"
         />
        </section>
 

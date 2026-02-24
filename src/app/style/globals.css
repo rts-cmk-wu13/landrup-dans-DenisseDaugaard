@@ -69,28 +69,29 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* ------------------------swiper section ----------- */
-
-#mySwiper{
-  position: relative;
-}
-#mySwiper .swiper-button-next{
-  color: var(--foreground);
-  border: 1px solid var(--foreground);
-  border-radius: 50%;
-  padding: 0.5rem;
-  position: absolute;
-  bottom: 1rem;
- 
-}
-#mySwiper .swiper-button-prev{
-  color: var(--foreground);
-  border: 1px solid var(--foreground);
-  border-radius: 50%;
-  padding: 0.5rem;
-  position: absolute;
-  bottom: 1rem;
+/* Give space for pagination under the content */
+.mySwiper {
+  padding-bottom: 48px;
 }
 
+/* Put pagination at the bottom center */
+.mySwiper .swiper-pagination {
+  bottom:0 !important;
+}
+
+/* Bullet look (white dots like your design) */
+.mySwiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 1;
+}
+
+.mySwiper .swiper-pagination-bullet-active {
+  background: rgba(41, 13, 199, 0.95);
+}
 /* ----------search bar--------------- */
 
 .search_active{

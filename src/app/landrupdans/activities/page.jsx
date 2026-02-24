@@ -23,7 +23,7 @@ export default async function Activities() {
     }
 
     return(
-        <article className="p-6">
+        <article className="p-8">
             <div className="flex">
               <SearchBar/>
             </div>

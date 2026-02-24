@@ -42,7 +42,7 @@ export async function getJSON(url) {
     let data = null;
     
     if (!res.ok) {
-      throw new Error("Det var ikke muligt at hente data testimonials");
+      return { ok: false, status: res.status, data: null, text: "Der skete en fejl ved indlæsning af data" };
     }
 
     if (contentType.includes("application/json")) {
@@ -54,11 +54,12 @@ export async function getJSON(url) {
 
     return { ok: res.ok, status: res.status, data };
   } catch (error) {
-    console.log("☠️ Error fetching posts:", error.message);
+    //console.log("☠️ Error fetching posts:", error.message);
     return {
       ok: false,
       data: null, 
-      text: String(error)};
+      text: "Netværksfejl: kunne ikke oprette forbindelse til serveren" 
+    };
   }
 }
 

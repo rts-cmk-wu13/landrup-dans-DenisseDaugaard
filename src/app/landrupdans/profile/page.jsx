@@ -5,9 +5,21 @@ import { getJSON } from "@/lib/dal/general";
 import { notFound } from "next/navigation"
 import { cookies } from "next/headers";
 
+
 export default async function Calendar(){
 
     const data = await getUserById();
+        if(!data.ok){
+            return(
+              <ErrorMessage
+                title="Fejl"
+                message="Der opstod en fejl ved hentning af brugerdata. Prøv venligst igen senere."
+                href="/login"
+                linkText="Gå til login"
+                />
+            )
+        }
+
     //console.log(data);
     const cookieStore = await cookies();
     const expirationTime = Number(cookieStore.get("expirationTime")?.value);

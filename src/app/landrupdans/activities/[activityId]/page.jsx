@@ -2,15 +2,40 @@ import { getJSON } from "@/lib/dal/general";
 import { getUserById } from "@/lib/dal/users/userById";
 import { cookies } from "next/headers";
 import ActivityDetailsCard from "@/app/components/landrupdans-pages/activities/ActivityDetailsCard";
-import { is } from "zod/v4/locales";
+import ErrorMessage from "@/app/components/errors/ErrorMesage";
 
 export default async function ActivityDetails({ params }) {
     const { activityId } = await params;
+
+    if(!activityId || isNaN(activityId)) {
+        return(
+            <ErrorMessage
+            title="Aktivitet ikke fundet" 
+            message="Der opstod en fejl under indlæsningen af aktiviteten. Prøv igen senere."
+            href="/landrupdans/activities"
+            linkText="Gå tilbage til aktiviteter"
+            />
+        )
+    }
+
     const ActivityUrl = `http://localhost:4000/api/v1/activities/${activityId}`;
    
-    const activity = await getJSON(ActivityUrl);
-    const data = activity.data;
+    const res = await getJSON(ActivityUrl);
+    if(!res.ok) {
+    console.log("☠️ Error fetching activity details:", res.text);
+        return(
+            <ErrorMessage
+            title="Aktivitet ikke fundet"
+            message="Der opstod en fejl under indlæsningen af aktiviteten. Prøv igen senere."
+            href="/landrupdans/activities"
+            linkText="Gå tilbage til aktiviteter"
+            />
+        )
+    }
+
+    const data = res?.data;
     //console.log(activityId);
+
     
     const cookiesStored = await cookies();
     //console.log('🤺', data);

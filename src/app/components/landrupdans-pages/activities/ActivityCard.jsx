@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ActivityCard({ data }) {
   return (
-    <Link href={`/landrupdans/activities/${data.id}`} className="relative block w-[300px] h-[300px] rounded-3xl rounded-br-none  overflow-hidden mb-8">
+    <Link href={`/landrupdans/activities/${data.id}`} className="relative block w-[310px] h-[310px] rounded-3xl rounded-br-none  overflow-hidden mb-8">
     
       <Image
         src={data.asset.url}
@@ -11,6 +11,7 @@ export default function ActivityCard({ data }) {
         fill
         className="object-cover"
         unoptimized
+        loading="lazy"
       />
 
 
