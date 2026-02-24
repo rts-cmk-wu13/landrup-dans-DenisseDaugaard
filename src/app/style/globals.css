@@ -57,13 +57,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .error_response{
   color: red;
-  font-size: small;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .success_response{
   color: green;
-  font-size: small;
+  font-size: 1rem;
   font-weight: bold;
 }
 

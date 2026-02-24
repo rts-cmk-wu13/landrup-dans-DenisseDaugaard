@@ -1,6 +1,7 @@
 export async function CreateUserRequest(url, body) {
   try {
     const res = await fetch(url, {
+
       method: "POST",
       // this says that the body of the request is in JSON format, and the server should expect JSON data.
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -9,23 +10,23 @@ export async function CreateUserRequest(url, body) {
     });
 
     const contentType = res.headers.get("content-type") || "";
-    let data = null;
-    let text = null;
+    const isJson = contentType.includes("application/json");
 
-    //this checks if the response from the server is in JSON format
-    if (contentType.includes("application/json")) {
-      data = await res.json();
-    } else {
-      text = await res.text();
+    const data = isJson ? await res.json().catch(() => null) : null;
+    const text = !isJson ? await res.text().catch(() => null) : null;
+
+    if (!res.ok) {
+      const message = (data && (data.message || data.error)) ||text || "Noget gik galt ved oprettelsen af data";
+      return { ok: false, status: res.status, data, text: message };
     }
 
-    return { ok: res.ok, status: res.status, data, text: text};
-    
+    return { ok: true, status: res.status, data, text };
   } catch (error) {
-    // this catch block will handle network errors or other unexpected issues during the fetch operation.
     return {
       ok: false,
-      data: null, 
-      message: "Der skete en fejl med indlæsning af data" };
+      status: 0,
+      data: null,
+      text: "Netværksfejl: kunne ikke oprette forbindelse til serveren",
+    };
   }
 }

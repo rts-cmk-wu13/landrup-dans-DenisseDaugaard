@@ -18,7 +18,6 @@ export async function CreateUser(_, formData) {
     password: inputData.password ?? "",
     confirmPassword: inputData.confirmPassword ?? "",
   };
-  
  
   if(values.password !== values.confirmPassword){
     return {
@@ -43,33 +42,25 @@ export async function CreateUser(_, formData) {
              ...res, 
              role: "default" 
             };
-
         //console.log(payload, '☺️');
 
     const response = await CreateUserRequest(url, payload);
-        if (!response.ok) {
-           console.log('something went wrong !! ☠️');
-        return {
-            ok: false,
-            status: response.status,
-            serverResponse: { error: response.data?.message || "Der skete en fejl ved oprettelse af brugeren, prøv igen senere." },
-        };
-        }
- 
 
-        if (!response.data) {
-                console.log('no data recived from the server');
-            return {
+       if(response.status === 404){ 
+          return{
             values,
-            serverResponse: { error: "Der skete en fejl ved indlæsning af data, prøv igen senere." },
-            };
-        }else{
-                console.log("now you have  a user !! ");
-            
-            return{
-                ok: true,
-               serverResponse: { success: "Brugeren blev oprettet, du bliver nu omdirigeret til login siden" }
-            }
-        }
+            serverResponse: { error: "Resource ikke fundet. Kontakt support." }
+          }
+       }  
+
+
+      if (!response.ok) {
+           //console.log('❌', response);
+      return {
+              values, 
+              serverResponse: { error: response.text || "Der skete en fejl ved oprettelsen af brugeren, prøv igen senere." },
+              };
+      }
+
 
 }

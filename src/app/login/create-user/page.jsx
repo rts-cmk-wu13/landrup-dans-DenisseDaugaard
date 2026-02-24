@@ -1,4 +1,4 @@
-import TopLogo from "@/app/components/login/TopLogo"
+import TopLogo from "@/app/components/landrupdans-pages/TopLogo"
 import CreateUserForm from "./CreateUserForm"
 
 export default function createUser() {

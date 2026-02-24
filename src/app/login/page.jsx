@@ -1,6 +1,6 @@
 
 import Link from "next/link"
-import TopLogo from "@/app/components/login/TopLogo"
+import TopLogo from "@/app/components/landrupdans-pages/TopLogo"
 import LoginForm from "@/app/login/LoginForm"
 
 export default  async function Login() {

@@ -15,7 +15,7 @@ export async function loginUser(prevState, formData) {
     const cookieStore = await cookies();
     
         if(username === prevState.values.username){
-            console.log('skip request no data sent');
+            //console.log('skip request no data sent');
             return prevState
         }
     
@@ -52,7 +52,7 @@ export async function loginUser(prevState, formData) {
             }
            
            if(!response.ok){
-            console.log('❌', response);
+            //console.log('❌', response);
                return {
                    values: { username: "", password: "" },
                   serverMessage:{ error: `${response.text}, prøv igen senere` || "ugyldigt brugernavn eller adgangskode" },

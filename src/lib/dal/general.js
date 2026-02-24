@@ -27,7 +27,6 @@ export async function postJSON(url, body, token) {
   } catch (error) {
     return {
       ok: false,
-      status: 0,
       data: null,
       text: "Netværksfejl: kunne ikke oprette forbindelse til serveren",
     };

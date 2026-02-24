@@ -114,9 +114,8 @@ export default function CreateUserForm(){
                     {isPending ? "Vent..." : "Opret bruger"}
                 </button>
                 )}
+
             </div>
-
-
       </form>
     )
 
