@@ -12,7 +12,6 @@ export async function getUserById() {
     const url = `http://localhost:4000/api/v1/users/${id}`;
     const res = await fetch(url,{
         headers: {
-
             Authorization: `Bearer ${token}`
         },
         cache: "no-store", // helpful in dev
@@ -20,6 +19,14 @@ export async function getUserById() {
 
     const contentType = res.headers.get("content-type") || "";
     let data = null;
+
+    if(!id || !token) {
+      return {
+        ok: false,
+        status: 401,
+        text: "Unauthorized: Mangler token eller bruger-id, prøv at logge ind igen",
+      }
+    }
     
     if (!res.ok) {
       throw new Error("Noget gik galt ved hentning af brugerdata, prøv at logge ind igen senere");

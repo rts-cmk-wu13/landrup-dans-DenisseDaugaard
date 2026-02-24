@@ -3,7 +3,6 @@
 import { CreateUserScheme } from "@/lib/scheme";
 import { CreateUserRequest } from "@/lib/dal/users/createUser";
 import { z } from "zod";
-import { headers } from "next/headers";
 
 
 export async function CreateUser(_, formData) {

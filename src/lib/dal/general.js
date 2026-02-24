@@ -6,7 +6,7 @@ export async function postJSON(url, body , token) {
       method: "POST",
       // this says that the body of the request is in JSON format, and the server should expect JSON data.
       headers: { 
-        "Content-Type": "application/json",
+        "Content-Type": "application/json" || "application/x-www-form-urlencoded",
         ...(token && { "Authorization": `Bearer ${token}` })
       },
       body: JSON.stringify(body),
@@ -77,22 +77,13 @@ export async function deleteJSON(url, token) {
       },
     })
 
-
     const contentTypeRes = res.headers.get("content-type") || "";
     let data = null;
     let text = null;
+
     if (contentTypeRes.includes("application/json")) {
       data = await res.json();
     }
-
-    if(res.status !== 200) {
-      return{
-        ok: false,
-        data: null,
-        text: "Der skete en fejl ved sletning af data, prøv igen senere"
-      }
-    }
-
    
     return { ok: res.ok, status: res.status, data, text };
   } catch (error) {

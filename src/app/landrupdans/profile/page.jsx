@@ -1,6 +1,7 @@
 import ErrorMessage from "@/app/components/errors/ErrorMesage";
 import ProfileCard from "@/app/components/landrupdans-pages/profile-components/ProfileCard"
 import { getUserById } from "@/lib/dal/users/userById"
+import { getJSON } from "@/lib/dal/general";
 import { notFound } from "next/navigation"
 import { cookies } from "next/headers";
 
@@ -12,7 +13,25 @@ export default async function Calendar(){
     const expirationTime = Number(cookieStore.get("expirationTime")?.value);
     // console.log(expirationTime);
     // console.log(new Date().getTime());
-    
+
+    const activitiesIds = data?.data?.activities?.map(activity => activity.id) || [];
+    const activities = await Promise.all(
+        activitiesIds.map(id =>
+            getJSON(`http://localhost:4000/api/v1/activities/${id}`)
+        )
+    )
+
+    const activitiesData = activities.map(res => res.data);
+    const usersInfo = activitiesData.flatMap(({ id: activityId, users }) =>
+        (users ?? []).map(({ id: userId, firstname, lastname, age }) => ({
+            activityId,
+            userId,
+            firstname,
+            lastname,
+            age,
+        }))
+    );
+        //console.log(usersInfo);
 
     if(expirationTime < new Date().getTime()){
         return(
@@ -40,7 +59,7 @@ export default async function Calendar(){
 
     return(
         <>
-        <ProfileCard data={data?.data} />
+        <ProfileCard data={data?.data} usersInfo={usersInfo} />
         </>
     )
 }
