@@ -4,7 +4,7 @@ import DeleteModal from "./delete-activity/DeleteModal";
 import { useRef, useState } from "react";
 import ClassList from "./ClassList";
 
-export default function ActivityCard({ activity, usersInfo }) {
+export default function ActivityCard({ activity, usersInfo, }) {
   const [isListOpen, setIsListOpen] = useState(false);
 
   const toggleList = () => setIsListOpen(prev => !prev);
@@ -19,8 +19,9 @@ export default function ActivityCard({ activity, usersInfo }) {
     //console.log(usersForThisActivity);
     
   return (
+  
     <>
-      <section className="bg-[var(--light-blue)] rounded-[0.75rem] p-4 text-[var(--background)] mb-6">
+     <section className="bg-[var(--light-blue)] rounded-[0.75rem] p-4 text-[var(--background)] mb-6">
         <h3 className="text-xl font-semibold mb-4">{activity.name}</h3>
         <p className="mb-4">
           {activity.weekday} {activity.time}
@@ -51,8 +52,8 @@ export default function ActivityCard({ activity, usersInfo }) {
         modalRef={modalRef}
         title={"Slet fra hold"}
         message={`Er du sikker på at du vil slette dig fra ${activity.name}?`}
-        style="w-10/12 mx-auto my-auto"
-      />
+        style="w-10/12 mx-auto my-auto"/>
     </>
+
   );
 }

@@ -25,7 +25,7 @@ export default async function Activities() {
     return(
         <article className="p-8">
             <div className="flex">
-              <SearchBar/>
+              <SearchBar data={data}/>
             </div>
             <h1 className="main_title">Aktiviteter</h1>
 

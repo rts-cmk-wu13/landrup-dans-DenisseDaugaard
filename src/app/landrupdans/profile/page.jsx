@@ -21,11 +21,19 @@ export default async function Calendar(){
         }
 
     //console.log(data);
+    const isInstructor = data?.data?.role === "instructor";
+    console.log('this is instructor:', isInstructor, data.data.firstname);
+    
     const cookieStore = await cookies();
     const expirationTime = Number(cookieStore.get("expirationTime")?.value);
     // console.log(expirationTime);
     // console.log(new Date().getTime());
 
+    const instructorId = isInstructor ? data.data.id : null;
+    console.log('Instructor ID:', instructorId);
+    const instructorActivities = isInstructor ? data.data.activities : [];
+    console.log('Instructor Activities:', instructorActivities);
+    
     const activitiesIds = data?.data?.activities?.map(activity => activity.id) || [];
     const activities = await Promise.all(
         activitiesIds.map(id =>
@@ -34,6 +42,8 @@ export default async function Calendar(){
     )
 
     const activitiesData = activities.map(res => res.data);
+    //console.log(activitiesData);
+    
     const usersInfo = activitiesData.flatMap(({ id: activityId, users }) =>
         (users ?? []).map(({ id: userId, firstname, lastname, age }) => ({
             activityId,
@@ -42,7 +52,7 @@ export default async function Calendar(){
             lastname,
             age,
         }))
-    );
+    );       
         //console.log(usersInfo);
 
     if(expirationTime < new Date().getTime()){

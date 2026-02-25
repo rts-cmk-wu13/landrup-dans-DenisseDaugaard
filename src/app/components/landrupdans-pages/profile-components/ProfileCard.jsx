@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import ActivityCard from "@/app/components/landrupdans-pages/profile-components/ClassCard";
 
 
-export default async function ProfileCard({data, usersInfo}) {
+export default async function ProfileCard({data, usersInfo,}) {
     const cookieStore = await cookies();
     const sessionDuration = Number(cookieStore?.get("expirationTime")?.value) || 0;
     //console.log(sessionDuration)
@@ -15,7 +15,6 @@ export default async function ProfileCard({data, usersInfo}) {
         }
     )
     //console.log(data);
-    
 
     return(
         <article className="flex flex-col">
@@ -38,7 +37,7 @@ export default async function ProfileCard({data, usersInfo}) {
             <section className="p-6">
                 <h2 className="text-xl mb-4">Tilmeldte hold</h2>
                 {data.activities.map((activity, index) => (
-                    <ActivityCard key={index} activity={activity} index={index} usersInfo={usersInfo} />
+                    <ActivityCard key={index} activity={activity} index={index} usersInfo={usersInfo}  />
                 ))}
             </section>
             <LogoutButton />
