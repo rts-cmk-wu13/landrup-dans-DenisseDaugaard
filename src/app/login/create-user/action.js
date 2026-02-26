@@ -62,5 +62,12 @@ export async function CreateUser(_, formData) {
               };
       }
 
+      return{
+        values: {},
+        serverResponse: { success: "Bruger oprettet succesfuldt!. Du kan nu logge ind." }
+      }
+
+
+
 
 }
