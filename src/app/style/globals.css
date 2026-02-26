@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-ubuntu: var(--font-ubuntu);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #003147;
+    --foreground: #E9E9E9;
+    --secundary-background: #072D56;
+    --light-gray:#6F6F6F;
+    --light-blue: #CCD6DA;
+  }
+}
+
+body{
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ubuntu), Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-ubuntu), Arial, sans-serif;
+}
+
+/* body .wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+} */
+
+.btn {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.grup_card>*{
+  margin-bottom: 1rem;
+}
+
+.main_title{
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.error_response{
+  color: red;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.success_response{
+  color: green;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+
+/* ------------------------swiper section ----------- */
+/* Give space for pagination under the content */
+.mySwiper {
+  padding-bottom: 48px;
+}
+
+/* Put pagination at the bottom center */
+.mySwiper .swiper-pagination {
+  bottom:0 !important;
+}
+
+/* Bullet look (white dots like your design) */
+.mySwiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 1;
+}
+
+.mySwiper .swiper-pagination-bullet-active {
+  background: rgba(41, 13, 199, 0.95);
+}
+/* ----------search bar--------------- */
+
+.search_active{
+ border-radius: 0.75rem;
+ border-bottom-right-radius: 0;
+  background-color:#3B5D6C;
+  padding: 1rem;
+}
