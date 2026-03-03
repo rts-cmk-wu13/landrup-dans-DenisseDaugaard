@@ -4,6 +4,7 @@ import Link from "next/link";
 export default function ActivityCard({ data }) {
   //console.log(data.id);
   
+  
   return (
     <Link href={`/landrupdans/activities/${data?.id}`} className="relative block w-[310px] h-[310px] rounded-3xl rounded-br-none  overflow-hidden mb-8">
     

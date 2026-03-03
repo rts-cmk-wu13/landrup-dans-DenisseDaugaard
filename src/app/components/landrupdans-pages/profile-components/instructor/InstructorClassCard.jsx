@@ -22,7 +22,7 @@ export async function InstructorClassCard() {
     <section /* className="hidden" */>
         <div className="flex justify-between mb-4 items-center">
             <h2 className="text-xl mb-4">Mine hold</h2>
-            <button className="rounded-[0.5rem] bg-white text-[var(--background)] text-xl px-4 py-2">+</button>
+            <Link href="/landrupdans/profile/create-activity" className="rounded-[0.5rem] bg-white text-[var(--background)] text-xl px-4 py-2">+</Link>
         </div>
         {activities ? (
         <>
