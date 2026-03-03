@@ -3,12 +3,11 @@
 import { cookies } from "next/headers";
 import { postJSON } from "@/lib/dal/general";
 import { redirect } from "next/navigation";
-import { Activity } from "react";
+import { getCookiesValues } from "@/lib/dal/users/cookieStore";
 
 export async function SignUpToAnActivity(_, formData) {
+  const { token, userId, userActivities } = await getCookiesValues(); 
   const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
-  const userId = cookieStore.get("userId")?.value;
 
   const activityId = formData.get("activityId");
   //console.log(activityId, '🤓');
@@ -31,6 +30,17 @@ export async function SignUpToAnActivity(_, formData) {
         message: "Der skete en fejl ved tilmelding. Prøv igen senere.",
       },
     };
+  }
+
+  //console.log(' 🤺 here is the activity' , response);
+  
+
+  // Update the userActivities cookie with the new activity ID
+
+  if (!userActivities.includes(Number(activityId))) {
+  
+      const updatedActivities = [...userActivities, Number(activityId)];
+     cookieStore.set("userActivities", JSON.stringify(updatedActivities));
   }
 
   redirect("/landrupdans/profile");

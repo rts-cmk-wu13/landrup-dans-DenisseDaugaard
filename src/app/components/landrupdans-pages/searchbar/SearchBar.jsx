@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import Link from "next/link";
 
@@ -19,6 +19,8 @@ export default function SearchBar({ data = [] }) {
     if (typeof value === "object") return Object.values(value).map(stringifyForSearch).join(" ");
     return "";
   };
+  console.log(stringifyForSearch(data));
+  
 
   const handleToggle = () => {
     setIsActive((prev) => !prev);
@@ -37,6 +39,7 @@ export default function SearchBar({ data = [] }) {
     e.preventDefault();
 
     const query = q.trim();
+    console.log("Submitting search for:", query);
     setSubmittedQ(query);
 
     if (!query) {
@@ -46,18 +49,15 @@ export default function SearchBar({ data = [] }) {
 
     const lower = query.toLowerCase();
 
-     const results = data.filter((item) => {
-     const searchable = stringifyForSearch(item).toLowerCase();
-    const words = query
-    .toLowerCase()
-    .split(" ")
-    .filter(word => word.length > 2); // ignore small words
-
-    return words.some(word => searchable.includes(word));
-    });
-    
+    const results = data.filter((item) =>
+      stringifyForSearch(item).toLowerCase().includes(lower)
+    );
+    console.log(results);   
     setSearchResults(results);
   };
+
+ 
+  
 
   const showDropdown = isActive && submittedQ; // show feedback only after a submit
   const noResults = showDropdown && searchResults.length === 0;

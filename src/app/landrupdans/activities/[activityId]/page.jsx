@@ -1,8 +1,7 @@
 import { getJSON } from "@/lib/dal/general";
-import { getUserById } from "@/lib/dal/users/userById";
-import { cookies } from "next/headers";
 import ActivityDetailsCard from "@/app/components/landrupdans-pages/activities/ActivityDetailsCard";
 import ErrorMessage from "@/app/components/errors/ErrorMesage";
+import { getCookiesValues } from "@/lib/dal/users/cookieStore";
 
 export default async function ActivityDetails({ params }) {
     const { activityId } = await params;
@@ -22,7 +21,7 @@ export default async function ActivityDetails({ params }) {
    
     const res = await getJSON(ActivityUrl);
     if(!res.ok) {
-    console.log("☠️ Error fetching activity details:", res.text);
+    //console.log("☠️ Error fetching activity details:", res.text);
         return(
             <ErrorMessage
             title="Aktivitet ikke fundet"
@@ -34,39 +33,33 @@ export default async function ActivityDetails({ params }) {
     }
 
     const data = res?.data;
-    //console.log(activityId);
-
+    //console.log(data);
+    const { token, role, age, userActivities, userId } = await getCookiesValues();
+    //console.log('this are my activities', userActivities);
     
-    const cookiesStored = await cookies();
-    //console.log('🤺', data);
+    //console.log('this is the user data ', myData);
+    
 
-    const userId = cookiesStored.get("userId")?.value;
-    const userToken = cookiesStored.get("token")?.value;
-
-    const UserUrl = `http://localhost:4000/api/v1/users/${userId}`;
-    const user = await getUserById(UserUrl, userToken);
-    const userData = user.data;
-    //console.log('👧', userData);
-
-    const isSignedInToActivity = userData.activities.some(activity => activity.id === data.id);
-    const isTooYoung = Number(userData.age) < Number(data.minAge);
-    const isTooOld = Number(userData.age) > Number(data.maxAge);
+    const isSignedInToActivity = userActivities?.some(activityId => activityId === data.id);
+    const isTooYoung = Number(age) < Number(data?.minAge);
+    const isTooOld = Number(age) > Number(data?.maxAge);
     const isUserInAge = !isTooYoung && !isTooOld;
     //console.log(isUserInAge, '✅✅');
     
     
-    const isLoggedIn = cookiesStored.has("token") && !cookiesStored.get("role");
-    const isInstructor = cookiesStored.get("role")?.value === "instructor";
+    const isLoggedIn = token && role === "Medlem";
+
+    const isInstructor = role === "Instruktør" && Number(userId) === Number(data.instructorId);
 
     return(
         <article className="flex flex-col">
-            {data ? <ActivityDetailsCard data={data} 
+            {data && <ActivityDetailsCard data={data} 
             isLoggedIn={isLoggedIn} 
             isInstructor={isInstructor} 
             isUserInAge={isUserInAge}
             isSignedInToActivity={isSignedInToActivity}
             />
-             : <p>Loading...</p>}
+           }
         </article>
     )
 

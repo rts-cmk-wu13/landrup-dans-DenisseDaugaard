@@ -3,11 +3,11 @@
 import { deleteJSON } from "@/lib/dal/general";
 import { cookies } from "next/headers";
 import {redirect} from "next/navigation";
+import { getCookiesValues } from "@/lib/dal/users/cookieStore";
 
 export async function deleteUserFromActivity(activityId) {
+    const { token, userId, userActivities } = await getCookiesValues();
     const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-    const userId = cookieStore.get("userId")?.value;
 
     if (!token || !userId) return {
         ok: false,
@@ -18,12 +18,6 @@ export async function deleteUserFromActivity(activityId) {
     const url = `http://localhost:4000/api/v1/users/${userId}/activities/${activityId}`;
     const response = await deleteJSON(url, token);
 
-
-    if(response.ok) {
-        //console.log("User successfully deleted from activity");
-        redirect("/landrupdans/profile");
-    }
-
     if(!response.ok) {
         return{
             ok: false,
@@ -31,5 +25,13 @@ export async function deleteUserFromActivity(activityId) {
             text: "Der skete en fejl ved sletning fra holdet, prøv igen senere"
         }
     }
+
+        console.log("User successfully deleted from activity");
+        //console.log("📜❌", response);
+        const updatedActivities = userActivities.filter(id => id !== Number(activityId));
+        // this will update the cookie with the new list of activities after deletion
+         cookieStore.set("userActivities", JSON.stringify(updatedActivities));
+         
+    redirect("/landrupdans/profile");
     
 }
