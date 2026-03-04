@@ -38,9 +38,9 @@ export async function InstructorClassCard() {
                     <div className="mt-4 flex justify-between">
                         <Link href={`/landrupdans/profile/${activity.id}`} className="btn bg-[var(--background)] text-[var(--foreground)]">Deltagerliste</Link>
                         <div className="flex gap-2">
-                            <button className="rounded px-3 bg-[var(--background)] text-[var(--foreground)]">
+                            <Link href={`/landrupdans/profile/update-activity/${activity.id}`} className="rounded px-3 bg-[var(--background)] text-[var(--foreground)]">
                                 <FaRegEdit  className="text-2xl"/>
-                            </button>
+                            </Link>
                             <button className="rounded px-3 bg-[var(--background)] text-[var(--foreground)]">
                                 <MdOutlineDelete className="text-2xl"/>
                             </button>

@@ -39,7 +39,7 @@ export default function ActivityDetailsCard({ data, isLoggedIn, isInstructor, is
         }
 
         {isInstructor && (
-            <Link href={`/landrupdans/profile`} className=" absolute right-12 top-[5%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Rediger</Link>
+            <Link href={`/landrupdans/profile/update-activity/${data.id}`} className=" absolute right-12 top-[5%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Rediger</Link>
         )}
         </>
     )
