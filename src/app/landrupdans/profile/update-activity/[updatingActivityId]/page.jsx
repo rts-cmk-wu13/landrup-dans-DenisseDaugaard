@@ -1,16 +1,27 @@
 import { getCookiesValues } from "@/lib/dal/users/cookieStore";
 import UpdateActivityForm from "./UpdateActivityForm";
 import { updateActivity } from "./action";
-import { id } from "zod/v4/locales";
+import ErrorMessage from "@/app/components/errors/ErrorMesage";
 
 
 export default async function UpdateActivityPage({params}) {
     const { updatingActivityId } = await params;
-    const { instructorActivities } = await getCookiesValues();
+    const { instructorActivities, role } = await getCookiesValues();
 
     // Find the activity to update based on the ID from the URL
     const activityToUpdate = instructorActivities?.find(activity => activity.id === Number(updatingActivityId));
     // console.log(activityToUpdate);
+
+            if (role !== "Instruktør") {
+                return (
+                    <ErrorMessage 
+                    title="Adgang nægtet"
+                    href="/landrupdans/profile"
+                    linkText="Tilbage til din profil"
+                    message="Du har ikke tilladelse til at opdatere hold."
+                    />
+                )
+            }
     
 
     if (!activityToUpdate) {

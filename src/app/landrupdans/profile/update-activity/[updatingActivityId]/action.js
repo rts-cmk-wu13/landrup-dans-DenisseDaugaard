@@ -73,7 +73,7 @@ export async function updateActivity(prevState, formData) {
     cookieStore.set("instructorActivities", JSON.stringify(updateActivities)); // Update the cookie with the new list of activities
 
     
-    console.log('this is the res: 😁✅ ', res);
+    //console.log('this is the res: 😁✅ ', res);
     redirect ("/landrupdans/activities") // Redirect to activities page on success
 
     // return {

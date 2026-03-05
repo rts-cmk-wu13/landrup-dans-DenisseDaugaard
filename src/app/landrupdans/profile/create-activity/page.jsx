@@ -1,9 +1,22 @@
-"use client"
+import { getCookiesValues } from "@/lib/dal/users/cookieStore";
 
 import { createActivity } from "./action";
 import CreateAndUpdateActivityForm from "./CreateActivityForm";
+import ErrorMessage from "@/app/components/errors/ErrorMesage";
 
-export default function CreateActivityPage(){
+export default async function CreateActivityPage(){
+    const { role } = await getCookiesValues();
+        if (role !== "Instruktør") {
+            return (
+                <ErrorMessage 
+                title="Adgang nægtet"
+                  href="/landrupdans/profile"
+                linkText="Tilbage til din profil"
+                message="Du har ikke tilladelse til at oprette hold."
+                />
+            )
+        }
+
     const initialState = {
         values: { 
         name: "",

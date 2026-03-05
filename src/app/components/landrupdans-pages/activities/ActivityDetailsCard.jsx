@@ -29,12 +29,12 @@ export default function ActivityDetailsCard({ data, isLoggedIn, isInstructor, is
         {/* {console.log(isLoggedIn)}  */}
 
         {isLoggedIn && !isUserInAge && <p 
-        className="absolute left-12 p-2 rounded top-[45%] bg-red-500/80 text-white font-semibold">
+        className="absolute left-12 p-2 rounded top-[40%] bg-red-500/80 text-white font-semibold">
             Du desværre opfylder ikke alderskravet for denne aktivitet.</p>
         }
 
         {isLoggedIn && isSignedInToActivity && 
-        <p className="absolute left-12 p-2 rounded top-[45%] bg-green-500/80 text-white font-semibold">
+        <p className="absolute left-12 p-2 rounded top-[40%] bg-green-500/80 text-white font-semibold">
             Du er allerede tilmeldt denne aktivitet.</p>
         }
 

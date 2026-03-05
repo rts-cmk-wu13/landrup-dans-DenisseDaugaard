@@ -11,7 +11,7 @@ import SessionDurationMessage from "./SessionDurationMessage";
 export default async function ProfileCard({data}) {
     //console.log('data:', data);
     
-    const {expirationTime, role, firstname, lastname } = await getCookiesValues();
+    const {expirationTime, role, firstname, lastname, instructorActivities} = await getCookiesValues();
     
     const sessionDuration = Number(expirationTime) || 0;
     //console.log(sessionDuration)
@@ -37,7 +37,7 @@ export default async function ProfileCard({data}) {
             <section className="p-6">
                 {isInstructor ? (
                     <>
-                        <InstructorClassCard />
+                        <InstructorClassCard instructorActivities={instructorActivities}  isInstructor={isInstructor}/>
                     </>
                 ):(
                     <>

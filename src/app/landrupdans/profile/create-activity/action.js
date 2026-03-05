@@ -6,6 +6,7 @@ import { createActivityReq } from "@/lib/dal/instructor/createActivityReq";
 import { redirect } from "next/navigation";
 import { getCookiesValues } from "@/lib/dal/users/cookieStore";
 import {cookies} from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export async function createActivity(_, formData) {
     
@@ -35,24 +36,25 @@ export async function createActivity(_, formData) {
         } 
         console.log('validation success 😁✅', result.data);
 
-    // const res = await createActivityReq(url, values);
-    // if (!res.ok) {
-    //     return{
-    //         values,
-    //         serverMessage: {error: res.text || "Noget gik galt ved oprettelsen af holdet"}
-    //     }
-    // }
+    const res = await createActivityReq(url, values);
+    if (!res.ok) {
+        return{
+            values,
+            serverMessage: {error: res.text || "Noget gik galt ved oprettelsen af holdet"}
+        }
+    }
     
-    // // Add the new activity to the existing list, [] if instructorActivities is undefined, start with an empty array
-    // const newActivities = [...(instructorActivities || []), res.data]; 
-    // cookieStore.set("instructorActivities", JSON.stringify(newActivities)); // Update the cookie with the new list of activities
+    // Add the new activity to the existing list, [] if instructorActivities is undefined, start with an empty array
+    const newActivities = [...(instructorActivities || []), res.data]; 
+    cookieStore.set("instructorActivities", JSON.stringify(newActivities)); // Update the cookie with the new list of activities
 
     
-    // console.log('this is the res: 😁✅ ', res);
-    // redirect ("/landrupdans/activities") // Redirect to activities page on success
-    // // return {
-    // //     values: {}, // Clear form values on success
-    // //     serverMessage: {success: "Holdet blev oprettet succesfuldt!"}
-    // // }
+    //console.log('this is the res: 😁✅ ', res);
+    revalidatePath("/landrupdans/activities"); // Refresh the activities page to show the newly created activity without needing a full page reload
+    redirect("/landrupdans/activities"); // Navigate back to the profile page after creation, where the new activity should now be visible in the list of instructor activities
+    // return {
+    //     values: {}, // Clear form values on success
+    //     serverMessage: {success: "Holdet blev oprettet succesfuldt!"}
+    // }
 
 }
