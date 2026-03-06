@@ -24,7 +24,7 @@ export async function updateActivity(prevState, formData) {
 
     
     const values = {
-        name: prevValues.name, // name is required and cannot be changed, so we take it from prevValues
+        name: prevValues.name !== inputData.name ? inputData.name : null,
         description: prevValues.description !==  inputData.description ? inputData.description : null,
         weekday: prevValues.weekday !==  inputData.weekday ? inputData.weekday : null,
         time: prevValues.time !==  inputData.time ? inputData.time : null,

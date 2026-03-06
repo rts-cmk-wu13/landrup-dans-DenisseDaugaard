@@ -35,12 +35,20 @@ export default function UpdateActivityForm({ initialState, updateActivity, id })
             type="text"
             name="name"
             placeholder="Holdnavn"
-            readOnly
+            readOnly={!isEnabled("description")}
+            className={inputClass("description")}
             defaultValue={state?.values?.name ?? ""}
           />
           {state?.errors?.name && (
             <span className="error_response mt-2 absolute left-0 -bottom-12">{state.errors.name}</span>
           )}
+           <button
+            type="button"
+            className="absolute right-0 top-0"
+            onClick={() => toggleField("description")}
+          >
+            <MdOutlineModeEditOutline />
+          </button>
         </div>
 
         {/* DESCRIPTION */}

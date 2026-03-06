@@ -22,5 +22,5 @@ export const instructorScheme = z.object({
 })
 
 // validate only what exists
-export const updateActivityScheme = instructorScheme.partial().required({ name: true }); // name required, others optional
+export const updateActivityScheme = instructorScheme.partial(); // name required, others optional
 // if you *don't* want to require name, remove `.required({ name: true })`
