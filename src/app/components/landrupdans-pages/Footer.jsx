@@ -38,7 +38,7 @@ export default function Footer(){
                         </Link>
                     </li>
                     <li>
-                        <Link href="/landrupdans/profile" className={`flex flex-col items-center ${isActiveExact("/landrupdans/profile")}`}>
+                        <Link href="/landrupdans/profile" className={`flex flex-col items-center ${isActiveNested("/landrupdans/profile")}`}>
                             <FaUserLarge size={24} />
                             <span className="ml-2">Profil</span>
                         </Link>

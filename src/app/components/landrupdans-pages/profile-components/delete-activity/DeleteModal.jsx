@@ -45,8 +45,8 @@ export default function DeleteModal({ title, message, style, modalRef, actId, is
                 <section className="text-center">
                     <h2 className="font-semibold mb-2">{title}</h2>
                     <p>{message}</p>
-{console.log(title)}
-{console.log(actId)}
+{/* {console.log(title)}
+{console.log(actId)} */}
                      {errorMessage && (
                         <p className="text-red-500 mt-2">
                             {errorMessage}
