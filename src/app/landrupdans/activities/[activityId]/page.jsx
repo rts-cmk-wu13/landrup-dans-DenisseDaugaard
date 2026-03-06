@@ -33,6 +33,17 @@ export default async function ActivityDetails({ params }) {
     }
 
     const data = res?.data;
+    if(!data){
+        return(
+            <ErrorMessage
+            title="Denne aktivitet findes ikke!"
+            message="Den aktivitet du prøver at tilgå eksistere ikke !"
+            href="/landrupdans/activities"
+            linkText="Gå tilbage til aktiviteter"
+            />
+        )
+    }
+
     //console.log(data);
     const { token, role, age, userActivities, userId } = await getCookiesValues();
     //console.log('this are my activities', userActivities);
