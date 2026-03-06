@@ -10,7 +10,7 @@ export default async function ActivityDetails({ params }) {
         return(
             <ErrorMessage
             title="Aktivitet ikke fundet" 
-            message="Der opstod en fejl under indlæsningen af aktiviteten. Prøv igen senere."
+            message="Du har prøvet at tilgå en aktivitet, der ikke eksisterer."
             href="/landrupdans/activities"
             linkText="Gå tilbage til aktiviteter"
             />
