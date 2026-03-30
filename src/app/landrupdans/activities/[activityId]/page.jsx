@@ -6,16 +6,6 @@ import { getCookiesValues } from "@/lib/dal/users/cookieStore";
 export default async function ActivityDetails({ params }) {
     const { activityId } = await params;
 
-    if(!activityId || isNaN(activityId)) {
-        return(
-            <ErrorMessage
-            title="Aktivitet ikke fundet" 
-            message="Du har prøvet at tilgå en aktivitet, der ikke eksisterer."
-            href="/landrupdans/activities"
-            linkText="Gå tilbage til aktiviteter"
-            />
-        )
-    }
 
     const ActivityUrl = `http://localhost:4000/api/v1/activities/${activityId}`;
    
