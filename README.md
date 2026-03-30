@@ -14,7 +14,7 @@ To demonstrate the functionality, a demo video is available in the **/public/dem
 
 A full demonstration of the application can be found here:
 
-📁 [`/public/demos`](./public/demos/Landrup-demo.mp4)
+📁 [`/public/demos`](https://github.com/rts-cmk-wu13/landrup-dans-DenisseDaugaard/blob/dev/public/demos/Landrup-demo.mp4)
 
 ---
 
