@@ -29,17 +29,17 @@ export default function ActivityDetailsCard({ data, isLoggedIn, isInstructor, is
         {/* {console.log(isLoggedIn)}  */}
 
         {isLoggedIn && !isUserInAge && <p 
-        className="absolute left-12 p-2 rounded top-[45%] bg-red-500/80 text-white font-semibold">
+        className="absolute left-12 p-2 rounded top-[40%] bg-red-500/80 text-white font-semibold">
             Du desværre opfylder ikke alderskravet for denne aktivitet.</p>
         }
 
         {isLoggedIn && isSignedInToActivity && 
-        <p className="absolute left-12 p-2 rounded top-[45%] bg-green-500/80 text-white font-semibold">
+        <p className="absolute left-12 p-2 rounded top-[40%] bg-green-500/80 text-white font-semibold">
             Du er allerede tilmeldt denne aktivitet.</p>
         }
 
         {isInstructor && (
-            <Link href={`/landrupdans/profile`} className=" absolute right-12 top-[5%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Rediger</Link>
+            <Link href={`/landrupdans/profile/update-activity/${data.id}`} className=" absolute right-12 top-[5%] mt-4 px-4 py-2 bg-[var(--background)] text-white rounded">Rediger</Link>
         )}
         </>
     )

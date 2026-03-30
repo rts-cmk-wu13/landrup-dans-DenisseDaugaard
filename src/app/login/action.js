@@ -4,6 +4,8 @@ import { postJSON } from "@/lib/dal/general"
 import { loginScheme } from "@/lib/scheme"
 import { redirect } from "next/navigation"
 import { cookies } from "next/headers";
+import { getUserById } from "@/lib/dal/users/userById"
+import { getJSON } from "@/lib/dal/general"
 
 
 export async function loginUser(prevState, formData) {
@@ -59,18 +61,49 @@ export async function loginUser(prevState, formData) {
                 };
             }
 
-            //console.log('📩', response.data);
+            console.log('📩', response.data);
+
 
             const { token, userId, role, validUntil } = response.data;
-
+            
             cookieStore.set("token", token);
             cookieStore.set("userId", userId);
-            cookieStore.set("expirationTime", validUntil);    
+            cookieStore.set("expirationTime", validUntil); 
             
-            if (role === "instructor") {
-            cookieStore.set("role", role);
+            if (role === "instructor"){
+                cookieStore.set("role", "Instruktør");
+                const activitiesResponse = await getJSON("http://localhost:4000/api/v1/activities");
+
+                    if(!activitiesResponse.ok){
+                        return{
+                            data: null,
+                            serverMessage:{ error:"Fejl ved hentning af aktiviteter. Prøv igen senere."},
+                        }
+                    }
+                const activitiesData = await activitiesResponse.data;
+                cookieStore.set("instructorActivities", JSON.stringify(activitiesData?.filter(activity => activity.instructorId === Number(userId)) || []));
             }
+
+            if (role === "default") cookieStore.set("role", "Medlem");
             
+            const userData = await getUserById(`http://localhost:4000/api/v1/users/${userId}`);
+            if(!userData.ok){
+                return{
+                    data: null,
+                    serverMessage:{ error:"Fejl ved hentning af brugerdata. Prøv igen senere."},
+                }
+            }
+            console.log(userData.data);
+
+            if(userData.data.age && userData.data.role !== 'instructor'){
+                cookieStore.set("age", userData.data.age.toString());
+                cookieStore.set ("userActivities", JSON.stringify(userData.data.activities?.map(activity => activity.id)) || []);
+            }
+        
+            cookieStore.set("firstname", userData.data.firstname);
+            cookieStore.set("lastname", userData.data.lastname);
+
+
             return redirect("/landrupdans/profile");
 
 

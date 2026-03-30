@@ -1,11 +1,11 @@
-import { RiDeleteBin6Line } from "react-icons/ri";
 
-export default function DeleteFromActBtn({activity, openModal}) {
+import { MdOutlineDelete } from "react-icons/md";
+export default function DeleteFromActBtn({openModal}) {
 
     return(
         <>
-       <button onClick={openModal} className="btn text-xs bg-red-500 text-[var(--foreground)]">
-        <RiDeleteBin6Line className="text-lg"/>
+       <button onClick={openModal} className="rounded-[0.75rem] px-3 bg-red-500 text-[var(--foreground)]">
+        <MdOutlineDelete className="text-2xl"/>
         </button>
         </>
     )

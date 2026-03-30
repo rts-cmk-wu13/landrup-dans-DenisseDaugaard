@@ -9,13 +9,15 @@ export default async function LogoutAction() {
 
     if(!cookieStore.has("token"))return;
 
-    console.log('action called');
+    //console.log('action called');
+    console.log(cookieStore);
+    
+    Array.from(cookieStore.getAll()).forEach(element  => {
+        if(!element.name.startsWith("__next")){
+            cookieStore.delete(element);
+        }
+    });
 
-    cookieStore.delete("token");
-    cookieStore.delete("userId");
-    cookieStore.delete("expirationTime");
-    cookieStore.delete("didAutoRedirect");
-    if(cookieStore.has("role")) cookieStore.delete("role");
 
     redirect("/login");
     

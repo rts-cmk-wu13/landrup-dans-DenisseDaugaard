@@ -12,5 +12,5 @@ export function proxy(request) {
 }
 
     export const config = {
-    matcher:["/landrupdans/:path*"],
+    matcher:["/landrupdans/profile:path*"],
     };

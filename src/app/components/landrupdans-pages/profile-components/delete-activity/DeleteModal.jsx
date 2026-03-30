@@ -1,17 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { deleteUserFromActivity } from "./action";
+import { deleteUserFromActivity } from "./userAction";
+import { deleteActivity } from "./instructorAction";
 
-export default function DeleteModal({ title, message, style, modalRef, actId}) {
+export default function DeleteModal({ title, message, style, modalRef, actId, isInstructor }) {
     const [errorMessage, setErrorMessage] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
 
     const handleClose = () => {
         if (modalRef.current) {
+           console.log(isInstructor);
             modalRef.current.close();
         }
     }
+
     
       const handleSubmitAndClose = async () => {
         if (!actId) {
@@ -19,10 +22,14 @@ export default function DeleteModal({ title, message, style, modalRef, actId}) {
             return;
         }
 
+        
         setIsDeleting(true);
-        const response = await deleteUserFromActivity(actId);
+        // make a logic for medlem and instruktør, so that instruktør can delete the whole activity and medlem can only delete themselves from the activity
+        const response =  isInstructor ? await deleteActivity(actId): await deleteUserFromActivity(actId);
         
         if (!response?.ok) {
+            console.log("☠️❌", response);
+            
             setErrorMessage(response?.text || "Der skete en fejl");
             setIsDeleting(false);
             return;
@@ -38,7 +45,8 @@ export default function DeleteModal({ title, message, style, modalRef, actId}) {
                 <section className="text-center">
                     <h2 className="font-semibold mb-2">{title}</h2>
                     <p>{message}</p>
-
+{/* {console.log(title)}
+{console.log(actId)} */}
                      {errorMessage && (
                         <p className="text-red-500 mt-2">
                             {errorMessage}
