@@ -7,6 +7,7 @@ This project was developed as part of a coursework exercise. The backend API use
 To demonstrate the functionality, a demo video is available in the **/public/demos** folder.
 
 👉 It is recommended to watch the demo video first to understand how the application works, and then explore the codebase.
+Check the dev branch to see the updated version.
 
 ---
 
@@ -59,11 +60,11 @@ Feel free to connect with me:
 * GitHub: [DenisseDaugaard](https://github.com/DenisseDaugaard/)
 
 
+---
 
 
 
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
